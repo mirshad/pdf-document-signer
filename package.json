@@ -1,0 +1,28 @@
+{
+  "name": "pdf-document-signer",
+  "version": "1.0.0",
+  "description": "InkMark — PDF document signing with predefined and custom drawn signatures",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/seed-signatures.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "inkmark",
+    "pdf",
+    "signature",
+    "document-signing"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^2.2.0",
+    "pdf-lib": "^1.17.1",
+    "uuid": "^11.0.5"
+  }
+}
