@@ -1,0 +1,566 @@
+:root {
+  --ink: #14243a;
+  --ink-soft: #3a4d66;
+  --paper: #f3efe6;
+  --paper-deep: #e7e0d2;
+  --panel: rgba(255, 252, 246, 0.88);
+  --line: rgba(20, 36, 58, 0.12);
+  --accent: #b45309;
+  --accent-deep: #92400e;
+  --accent-soft: rgba(180, 83, 9, 0.12);
+  --danger: #9b3b2e;
+  --shadow: 0 18px 40px rgba(20, 36, 58, 0.12);
+  --radius: 14px;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(15, 118, 110, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(180, 120, 60, 0.16), transparent 50%),
+    linear-gradient(160deg, #f7f3ea 0%, #ebe4d6 45%, #e4ddd0 100%);
+  background-attachment: fixed;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 252, 246, 0.72);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-mark {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.7rem;
+  background:
+    linear-gradient(135deg, transparent 42%, var(--accent) 42% 58%, transparent 58%),
+    linear-gradient(45deg, #1d3557, #0f766e);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+  animation: mark-pulse 4s ease-in-out infinite;
+}
+
+@keyframes mark-pulse {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.04);
+  }
+}
+
+.brand-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.brand-tag {
+  margin: 0.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.65rem 1.15rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: #f8f4ec;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0d1a2b;
+}
+
+.btn-accent {
+  background: #1d4e89;
+  color: #f4f8fc;
+}
+
+.btn-accent:hover:not(:disabled) {
+  background: #163a66;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(20, 36, 58, 0.04);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+.file-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1.5rem;
+  min-height: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.05rem 1.1rem;
+  box-shadow: var(--shadow);
+  animation: rise-in 0.45s ease both;
+}
+
+.panel:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.panel:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.panel-lead {
+  margin: 0.35rem 0 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.signature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-height: 280px;
+  overflow: auto;
+  margin-bottom: 0.75rem;
+  padding-right: 0.15rem;
+}
+
+.signature-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 0.5rem;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf8;
+  padding: 0.55rem 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.signature-item:hover {
+  border-color: rgba(15, 118, 110, 0.35);
+}
+
+.signature-item.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.2);
+}
+
+.signature-item img {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 48px;
+  object-fit: contain;
+  background:
+    linear-gradient(45deg, rgba(20, 36, 58, 0.04) 25%, transparent 25%) 0 0 / 12px 12px,
+    linear-gradient(-45deg, rgba(20, 36, 58, 0.04) 25%, transparent 25%) 0 0 / 12px 12px,
+    #fff;
+  border-radius: 8px;
+}
+
+.signature-item .sig-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.signature-item .sig-badge {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.signature-item .sig-delete {
+  grid-column: 2;
+  grid-row: 2;
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.field-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.doc-name {
+  margin: 0.4rem 0 0.8rem;
+  word-break: break-word;
+  font-weight: 600;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.viewer-pane {
+  min-height: 70vh;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.55), rgba(243, 239, 230, 0.8)),
+    repeating-linear-gradient(
+      -12deg,
+      transparent,
+      transparent 10px,
+      rgba(20, 36, 58, 0.015) 10px,
+      rgba(20, 36, 58, 0.015) 11px
+    );
+  box-shadow: var(--shadow);
+  overflow: auto;
+  position: relative;
+}
+
+.empty-state {
+  min-height: 70vh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  animation: fade-up 0.55s ease both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.empty-state h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.empty-state p {
+  margin: 0 0 0.5rem;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.viewer-wrap {
+  padding: 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+.page-stage {
+  position: relative;
+  box-shadow: 0 12px 36px rgba(20, 36, 58, 0.18);
+  background: #fff;
+  line-height: 0;
+  animation: page-in 0.4s ease both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#pdf-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+}
+
+.placement {
+  position: absolute;
+  border: 1.5px dashed rgba(15, 118, 110, 0.7);
+  background: rgba(15, 118, 110, 0.06);
+  border-radius: 4px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.placement img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.placement .remove {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.55rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #f7f3ea;
+  padding: 0.75rem 1.15rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  z-index: 50;
+  animation: toast-in 0.25s ease both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.sign-dialog {
+  border: none;
+  border-radius: 18px;
+  padding: 0;
+  width: min(640px, calc(100vw - 1.5rem));
+  background: #fffdf8;
+  box-shadow: 0 24px 60px rgba(20, 36, 58, 0.28);
+}
+
+.sign-dialog::backdrop {
+  background: rgba(16, 28, 44, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.sign-form {
+  padding: 1.25rem 1.35rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.sign-form header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+}
+
+.sign-form header p {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.field input {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: #fff;
+}
+
+.pad-wrap {
+  border: 1px dashed rgba(20, 36, 58, 0.25);
+  border-radius: 12px;
+  background:
+    linear-gradient(#fff, #fff),
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(20, 36, 58, 0.06) 27px,
+      rgba(20, 36, 58, 0.06) 28px
+    );
+  background-blend-mode: normal;
+  overflow: hidden;
+}
+
+#sign-pad {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dialog-actions .spacer {
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .signature-list {
+    max-height: 180px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

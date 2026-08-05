@@ -1,0 +1,9 @@
+node_modules/
+data/uploads/*
+!data/uploads/.gitkeep
+data/signed/*
+!data/signed/.gitkeep
+data/signatures/*
+!data/signatures/.gitkeep
+*.log
+.DS_Store

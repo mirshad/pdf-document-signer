@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InkMark — PDF Document Signer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <p class="brand-name">InkMark</p>
+          <p class="brand-tag">PDF document signer</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <label class="btn btn-primary file-btn">
+          Open PDF
+          <input id="pdf-input" type="file" accept="application/pdf,.pdf" hidden />
+        </label>
+        <button id="btn-apply" class="btn btn-accent" type="button" disabled>Apply &amp; Download</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>Signatures</h2>
+          <p class="panel-lead">Pick a saved mark, or draw a new one.</p>
+          <div id="signature-list" class="signature-list" role="list"></div>
+          <button id="btn-new-sign" class="btn btn-ghost full" type="button">Create new signature</button>
+        </section>
+
+        <section class="panel">
+          <h2>Placement</h2>
+          <p class="panel-lead">Click the page to place the selected signature. Drag to move.</p>
+          <div class="field-row">
+            <label for="sig-width">Width</label>
+            <input id="sig-width" type="range" min="80" max="320" value="180" />
+            <span id="sig-width-val">180px</span>
+          </div>
+          <button id="btn-clear-placements" class="btn btn-ghost full" type="button" disabled>Clear placements</button>
+        </section>
+
+        <section class="panel doc-meta" id="doc-meta" hidden>
+          <h2>Document</h2>
+          <p id="doc-name" class="doc-name"></p>
+          <div class="pager">
+            <button id="btn-prev" class="btn btn-ghost" type="button" aria-label="Previous page">←</button>
+            <span id="page-indicator">Page 1 / 1</span>
+            <button id="btn-next" class="btn btn-ghost" type="button" aria-label="Next page">→</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="viewer-pane">
+        <div id="empty-state" class="empty-state">
+          <h1>Open a PDF to begin</h1>
+          <p>Upload a document, choose or draw a signature, then click on the page to place it.</p>
+          <label class="btn btn-primary file-btn">
+            Choose PDF file
+            <input id="pdf-input-empty" type="file" accept="application/pdf,.pdf" hidden />
+          </label>
+        </div>
+
+        <div id="viewer-wrap" class="viewer-wrap" hidden>
+          <div id="page-stage" class="page-stage">
+            <canvas id="pdf-canvas"></canvas>
+            <div id="overlay" class="overlay"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <dialog id="sign-dialog" class="sign-dialog">
+    <form method="dialog" id="sign-form" class="sign-form">
+      <header>
+        <h2>Create signature</h2>
+        <p>Write your signature in the pad below.</p>
+      </header>
+      <label class="field">
+        <span>Display name</span>
+        <input id="sign-name" type="text" maxlength="80" placeholder="e.g. Alex Rivera" required />
+      </label>
+      <div class="pad-wrap">
+        <canvas id="sign-pad" width="560" height="200" aria-label="Signature drawing pad"></canvas>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="btn-clear-pad" class="btn btn-ghost">Clear</button>
+        <div class="spacer"></div>
+        <button type="button" id="btn-cancel-sign" class="btn btn-ghost" value="cancel">Cancel</button>
+        <button type="submit" id="btn-save-sign" class="btn btn-primary">Save signature</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
